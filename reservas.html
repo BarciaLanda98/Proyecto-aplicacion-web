@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Reservas - Hotel ULEAM</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -21,53 +21,29 @@
         </nav>
     </header>
 
-    <!-- Formulario de Reservas -->
-    <div class="reservation-form">
-        <h2>Realiza tu Reserva</h2>
-        <form>
-            <label for="destination">De donde nos visitas:</label>
-            <input type="text" id="destination" name="destination" required>
-
-            <label for="checkin">Check-in:</label>
-            <input type="date" id="checkin" name="checkin" required>
-
-            <label for="checkout">Check-out:</label>
-            <input type="date" id="checkout" name="checkout" required>
-
-            <label for="rooms">Habitaciones:</label>
-            <input type="number" id="rooms" name="rooms" min="1" value="1" required>
-
-            <label for="guests">Huéspedes por Habitación:</label>
-            <input type="number" id="guests" name="guests" min="1" value="1" required>
-
-            <button type="submit">Reservar Ahora</button>
-        </form>
-    </div>
-
-    <!-- Sección de Promociones -->
-    <div class="promotion-section">
-        <h2>Reservas Especiales</h2>
-        <div class="card-container">
-            <div class="card">
-                <img src="C:\Users\FREDDY BARCIA\Documents\Aplicacion Web\Proyecto Final/comidareserva.jpg" alt="Vacaciones All-Inclusive">
-                <h3>Vacaciones All-Inclusive</h3>
-                <p>Gastronomía deliciosa. Cocteles artesanales. Entretenimiento sin límites.</p>
-            </div>
-            <div class="card">
-                <img src="C:\Users\FREDDY BARCIA\Documents\Aplicacion Web\Proyecto Final/golf.jpg" alt="Colección Golf">
-                <h3>Colección Golf</h3>
-                <p>Escapadas de golf de calidad mundial en nuestros hoteles.</p>
-            </div>
-            <div class="card">
-                <img src="C:\Users\FREDDY BARCIA\Documents\Aplicacion Web\Proyecto Final/juegos.jpg" alt="Destinos de Entretenimiento">
-                <h3>Destinos de Entretenimiento</h3>
-                <p>Desde las luces brillantes hasta videojuegos arcades.</p>
-            </div>
-        </div>
+    <div class="reservation-list">
+        <h2>Lista de Reservas</h2>
+        <ul id="reservationList"></ul>
     </div>
 
     <footer>
-        <p>&copy; 2024 Hotel ULEAM. Todos los derechos reservados.</p>
+        <p>© 2024 Hotel ULEAM. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        fetch('reservas.json')
+            .then(response => response.json())
+            .then(data => {
+                const reservas = data.reservas;
+                const reservationList = document.getElementById('reservationList');
+
+                reservas.forEach(reserva => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Reserva ${reserva.codigo}: ${reserva.nombre} (${reserva.email}) - Check-in: ${reserva.checkin}, Check-out: ${reserva.checkout}, Habitación: ${reserva.habitacion}`;
+                    reservationList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error al cargar el archivo JSON:', error));
+    </script>
 </body>
 </html>

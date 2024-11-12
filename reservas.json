@@ -1,0 +1,20 @@
+{
+    "reservas": [
+        {
+            "codigo": "R001",
+            "nombre": "Juan Pérez",
+            "email": "juan.perez@example.com",
+            "checkin": "2024-11-15",
+            "checkout": "2024-11-20",
+            "habitacion": "101"
+        },
+        {
+            "codigo": "R002",
+            "nombre": "María López",
+            "email": "maria.lopez@example.com",
+            "checkin": "2024-11-18",
+            "checkout": "2024-11-22",
+            "habitacion": "102"
+        }
+    ]
+}

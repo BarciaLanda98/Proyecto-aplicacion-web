@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel ULEAM - Habitaciones</title>
+    <title>Habitaciones - Hotel ULEAM</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navegación principal -->
     <header>
-        <div class="logo">
-            <h1>Hotel ULEAM</h1>
-        </div>
+        <h1>Hotel ULEAM</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -24,24 +21,36 @@
         </nav>
     </header>
 
-    <!-- Sección de Gestión de Habitaciones -->
-    <section id="habitaciones" class="section">
-        <h2>Gestión de Habitaciones</h2>
-        <div id="roomStatus">
-            <button class="room available" onclick="changeStatus(this)">Habitación 101 - Disponible</button>
-            <button class="room occupied" onclick="changeStatus(this)">Habitación 102 - Ocupada</button>
-            <button class="room maintenance" onclick="changeStatus(this)">Habitación 103 - En Mantenimiento</button>
-        </div>
-    </section>
+    <div class="room-list">
+        <h2>Lista de Habitaciones</h2>
+        <ul id="roomList"></ul>
+    </div>
 
-    <!-- Pie de página / Contacto -->
-    <footer id="contacto">
-        <p>Contacto: +593 123 456 789 | Email: info@hoteluleam.com</p>
-        <p>Ubicación: Av. Principal 123, Manta, Ecuador</p>
-        <p>&copy; 2024 Hotel ULEAM. Todos los derechos reservados.</p>
+    <footer>
+        <p>© 2024 Hotel ULEAM. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Archivo JavaScript -->
-    <script src="scripts.js"></script>
+    <script>
+        fetch('habitaciones.xml')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(data, 'application/xml');
+                const habitaciones = xml.getElementsByTagName('habitacion');
+                const roomList = document.getElementById('roomList');
+
+                for (let i = 0; i < habitaciones.length; i++) {
+                    const numero = habitaciones[i].getElementsByTagName('numero')[0].textContent;
+                    const tipo = habitaciones[i].getElementsByTagName('tipo')[0].textContent;
+                    const precio = habitaciones[i].getElementsByTagName('precio')[0].textContent;
+                    const estado = habitaciones[i].getElementsByTagName('estado')[0].textContent;
+
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Habitación ${numero}: ${tipo} - $${precio} - ${estado}`;
+                    roomList.appendChild(listItem);
+                }
+            })
+            .catch(error => console.error('Error al cargar el archivo XML:', error));
+    </script>
 </body>
 </html>
