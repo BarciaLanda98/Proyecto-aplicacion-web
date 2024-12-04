@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Contacto - Hotel ULEAM</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .contact-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .contact-card a {
+            display: block;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-card i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel ULEAM - Página Principal</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Navegación principal -->
+<header>
+    <div class="logo">
+        <h1>Hotel ULEAM</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="reservas.html">Reservas</a></li>
+            <li><a href="reportes.html">Reportes</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li id="login-link"><a href="login.html">Iniciar Sesion</a></li>
+            <li><a href="Mis reservas.html" id="misReservasLink" style="display: none;">Mis Reservas</a></li> <!-- Enlace oculto -->
+        </ul>
+    </nav>
+    <div id="user-info" style="display: flex; align-items: center;">
+        <img id="user-icon" src="" alt="Usuario" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        <span id="user-name"></span>
+        <button id="logout-btn" style="margin-left: 39px; padding: 5px 10px;width: 180px;">Cerrar Sesión</button> <!-- Botón de cierre de sesión -->
+    </div>
+</header>
+<script>
+    // Verificar si hay un usuario logueado al cargar la página
+    const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+    if (usuarioLogueado) {
+        const usuario = JSON.parse(usuarioLogueado);
+        document.getElementById('misReservasLink').style.display = 'inline'; // Mostrar "Mis reservas"
+        document.getElementById('user-name').textContent = usuario.nombre || 'Usuario';
+        document.getElementById('user-icon').src = usuario.icono || ''; // Si el usuario tiene icono
+    }
+</script>
+
+
+    <div class="container">
+        <h2>Encuéntranos a través de nuestras redes sociales y contacto directo</h2>
+        <div class="contact-cards">
+            <!-- Tarjeta WhatsApp -->
+            <div class="contact-card">
+                <img src="img/whatsapp.jpg">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <a href="https://wa.me/1234567890" target="_blank">Enviar mensaje</a>
+            </div>
+
+            <!-- Tarjeta Facebook -->
+            <div class="contact-card">
+                <img src="img/facebook.png">
+                <i class="fab fa-facebook"></i>
+                <h3>Facebook</h3>
+                <a href="https://www.facebook.com/HotelULEAM" target="_blank">Visítanos en Facebook</a>
+            </div>
+
+            <!-- Tarjeta Instagram -->
+            <div class="contact-card">
+                <img src="img/instagram.jpg">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <a href="https://www.instagram.com/HotelULEAM" target="_blank">Síguenos en Instagram</a>
+            </div>
+
+            <!-- Tarjeta Teléfono -->
+            <div class="contact-card">
+                <img src="img/telefono fijo.png">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Teléfono</h3>
+                <a href="tel:+1234567890">Llámanos: 05 295204</a>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js" defer></script>
+</body>
+</html>

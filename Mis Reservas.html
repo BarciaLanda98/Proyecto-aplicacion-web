@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Mis Reservas - Hotel ULEAM</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        .reservation-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .reservation-card h3 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+
+        .reservation-card p {
+            margin: 5px 0;
+        }
+
+        .reservation-card .details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .reservation-card .button-container {
+            text-align: right;
+        }
+
+        .button-container button {
+            padding: 10px 15px;
+            background-color: #FF5733; /* Color de eliminar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #d94e1e; /* Color al pasar el mouse */
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .reservation-card .details {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mis Reservas - Hotel ULEAM</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="reservas.html">Reservar Ahora</a></li>
+                <li><a href="checkin.html">Check-In</a></li>
+                <li><a href="habitaciones.html">Habitaciones</a></li>
+                <li><a href="reportes.html">Reportes</a></li>
+                <li><a href="login.html">Iniciar Sesion</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="Mis reservas.html" id="misReservasLink" style="display: none;">Mis Reservas</a></li> <!-- Enlace oculto -->
+            </ul>
+        </nav>
+    </header>
+    <script>
+        // Verificar si hay un usuario logueado al cargar la página
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        if (usuarioLogueado) {
+            const usuario = JSON.parse(usuarioLogueado);
+            document.getElementById('misReservasLink').style.display = 'inline'; // Mostrar "Mis reservas"
+            document.getElementById('user-name').textContent = usuario.nombre || 'Usuario';
+            document.getElementById('user-icon').src = usuario.icono || ''; // Si el usuario tiene icono
+        }
+    </script>
+
+    <div class="container" id="reservas-lista">
+        <h2>Tus Reservas</h2>
+        <div id="reservas-container"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Hotel ULEAM. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (!usuarioLogueado) {
+                alert('Debes iniciar sesión para ver tus reservas.');
+                window.location.href = 'login.html'; // Redirigir al login si no hay usuario logueado
+            } else {
+                const usuario = JSON.parse(usuarioLogueado);
+                const reservasContainer = document.getElementById('reservas-container');
+
+                if (usuario.reservas && usuario.reservas.length > 0) {
+                    usuario.reservas.forEach((reserva, index) => {
+                        const reservaDiv = document.createElement('div');
+                        reservaDiv.classList.add('reservation-card');
+                        reservaDiv.innerHTML = `
+                            <h3>Reserva #${index + 1}</h3>
+                            <p><strong>Destino:</strong> ${reserva.destination}</p>
+                            <p><strong>Nombre:</strong> ${reserva.checkin}</p>
+                            <p><strong>Huéspedes:</strong> ${reserva.checkout}</p>
+                            <p><strong>Habitaciones:</strong> ${reserva.rooms}</p>
+                            <div class="details">
+                                <span><strong>Fecha de Entrada:</strong> ${reserva.checkinDate}</span>
+                                <span><strong>Fecha de Salida:</strong> ${reserva.checkoutDate}</span>
+                            </div>
+                            <div class="button-container">
+                                <button onclick="eliminarReserva(${index})">Eliminar Reserva</button>
+                            </div>
+                        `;
+                        reservasContainer.appendChild(reservaDiv);
+                    });
+                } else {
+                    reservasContainer.innerHTML = '<p>No tienes reservas.</p>';
+                }
+            }
+        });
+
+        function eliminarReserva(index) {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (usuarioLogueado) {
+                const usuario = JSON.parse(usuarioLogueado);
+                // Eliminar la reserva seleccionada
+                usuario.reservas.splice(index, 1);
+                if (confirm("¿Estás seguro de que deseas eliminar esta reserva?")) {
+    // Código para eliminar la reserva
+}
+
+                // Actualizar el objeto usuario en localStorage
+                localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
+                alert("Reserva eliminada correctamente.");
+                // Recargar la página para reflejar los cambios
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
