@@ -19,10 +19,27 @@
                 <li><a href="checkin.html">Check-In</a></li>
                 <li><a href="habitaciones.html">Habitaciones</a></li>
                 <li><a href="reportes.html">Reportes</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li id="login-link"><a href="login.html">Iniciar Sesion</a></li>
+                <li><a href="Mis reservas.html" id="misReservasLink" style="display: none;">Mis Reservas</a></li> <!-- Enlace oculto -->
             </ul>
         </nav>
+        <div id="user-info" style="display: flex; align-items: center;">
+            <img id="user-icon" src="" alt="Usuario" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            <span id="user-name"></span>
+            <button id="logout-btn" style="margin-left: 39px; padding: 5px 10px;width: 180px;">Cerrar Sesión</button> <!-- Botón de cierre de sesión -->
+        </div>
     </header>
+    <script>
+        // Verificar si hay un usuario logueado al cargar la página
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        if (usuarioLogueado) {
+            const usuario = JSON.parse(usuarioLogueado);
+            document.getElementById('misReservasLink').style.display = 'inline'; // Mostrar "Mis reservas"
+            document.getElementById('user-name').textContent = usuario.nombre || 'Usuario';
+            document.getElementById('user-icon').src = usuario.icono || ''; // Si el usuario tiene icono
+        }
+    </script>
 
     <!-- Sección de Bienvenida / Banner -->
     <section id="hero">
@@ -41,6 +58,6 @@
     </footer>
 
     <!-- Archivo JavaScript -->
-    <script src="scripts.js"></script>
+    <script src="scripts.js"defer></script>
 </body>
 </html>

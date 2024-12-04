@@ -32,8 +32,8 @@ nav ul li a {
 /* Sección de Bienvenida / Hero con imagen de fondo */
 .hero-content {
     text-align: center;
-    padding: 100px;
-    background-image: url('C:/Users/FREDDY BARCIA/Documents/Aplicacion Web/Proyecto Final/Proyecto-aplicacion-web/fondomanta.jpg');
+    padding: 200px;
+    background-image: url('img/fondomanta.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -67,6 +67,7 @@ nav ul li a {
     border-radius: 5px;
     font-size: 18px;
 }
+
 
 /* Estilos para el formulario de reservas */
 .reservation-form {
@@ -169,4 +170,186 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
+}
+/* Estilos para el formulario de login */
+.login-form {
+    padding: 50px;
+    background-color: #ffffff;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-form h2 {
+    color: #3498db;
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-form button:hover {
+    background-color: #2980b9;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+/*Registrarse */
+/* Estilos para formularios (Login y Registro) */
+.login-form, .register-form {
+    padding: 50px;
+    background-color: #ffffff;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-form h2, .register-form h2 {
+    color: #3498db;
+    margin-bottom: 20px;
+}
+
+.login-form label, .register-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.login-form input, .register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form button, .register-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-form button:hover, .register-form button:hover {
+    background-color: #2980b9;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+input:focus {
+    border-color: #5c6bc0;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3f51b5;
+}
+
+button:active {
+    background-color: #303f9f;
+}
+
+/* Estilo para los enlaces */
+a {
+    color: #5c6bc0;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+#user-info {
+    display: none;
 }

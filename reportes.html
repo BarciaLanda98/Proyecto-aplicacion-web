@@ -16,22 +16,59 @@
                 <li><a href="checkin.html">Check-In</a></li>
                 <li><a href="habitaciones.html">Habitaciones</a></li>
                 <li><a href="reportes.html">Reportes</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html">Iniciar Sesion</a></li>
+                <li><a href="Mis reservas.html" id="misReservasLink" style="display: none;">Mis Reservas</a></li> <!-- Enlace oculto -->
+
             </ul>
         </nav>
-    </header>
-
+        <div id="user-info" style="display: flex; align-items: center;">
+            <img id="user-icon" src="" alt="Usuario" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            <span id="user-name"></span>
+            <button id="logout-btn" style="margin-left: 39px; padding: 5px 10px;width: 180px;">Cerrar Sesión</button> <!-- Botón de cierre de sesión -->
+        </div>
+    </header>  
+    <script>
+        // Verificar si hay un usuario logueado al cargar la página
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        if (usuarioLogueado) {
+            const usuario = JSON.parse(usuarioLogueado);
+            document.getElementById('misReservasLink').style.display = 'inline'; // Mostrar "Mis reservas"
+            document.getElementById('user-name').textContent = usuario.nombre || 'Usuario';
+            document.getElementById('user-icon').src = usuario.icono || ''; // Si el usuario tiene icono
+        }
+    </script>
+    <!-- Sección de Reportes -->
     <div class="report-section">
         <h2>Generar Reportes</h2>
-        <!-- Aquí se cargan las habitaciones y reservas -->
-        <div id="habitaciones-list"></div>
-        <div id="reservas-list"></div>
+        <form class="report-form">
+            <label for="report-type">Tipo de reporte:</label>
+            <select id="report-type" name="report-type" required>
+                <option value="">Seleccione</option>
+                <option value="reservas">Reporte de Reservas</option>
+                <option value="checkin">Reporte de Check-In</option>
+                <option value="habitaciones">Reporte de Habitaciones</option>
+            </select>
+
+            <label for="start-date">Fecha de inicio:</label>
+            <input type="date" id="start-date" name="start-date" required>
+
+            <label for="end-date">Fecha de fin:</label>
+            <input type="date" id="end-date" name="end-date" required>
+
+            <label for="room">Número de habitación (en caso de tener) :</label>
+            <input type="text" id="room" name="room" placeholder="Ej: 101">
+            <label for="room">Novedad</label>
+            <input type="text" id="room" name="room" placeholder="Escriba el incidente">
+
+            <button type="submit">Generar Reporte</button>
+        </form>
     </div>
 
     <footer>
         <p>&copy; 2024 Hotel ULEAM. Todos los derechos reservados.</p>
     </footer>
+    <script src="scripts.js"defer></script>
 
-    <script src="scripts.js"></script>
 </body>
 </html>
